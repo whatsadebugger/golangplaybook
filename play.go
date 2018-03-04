@@ -1,13 +1,24 @@
 package main
 
-import "fmt"
+import (
+	"log"
+	"os"
+
+	"github.com/urfave/cli"
+)
 
 func main() {
-	var s []int
-	fmt.Println(s, len(s), cap(s))
-	if s == nil {
-		fmt.Println("nil!")
+	app := cli.NewApp()
+
+	app.Flags = []cli.Flag{
+		cli.StringFlag{
+			Name:  "config, c",
+			Usage: "Load configuration from `FILE`",
+		},
+	}
+
+	err := app.Run(os.Args)
+	if err != nil {
+		log.Fatal(err)
 	}
 }
-
-

@@ -1,24 +1,26 @@
 package main
 
-import (
-	"log"
-	"os"
+import "fmt"
 
-	"github.com/urfave/cli"
-)
+var battle = make(chan string)
+
+func warrior(name string, done chan struct{}) {
+	select {
+	case opponent := <-battle:
+		fmt.Printf("%s beat %s\n", name, opponent)
+	case battle <- name:
+		// I lost :-(
+	}
+	done <- struct{}{}
+}
 
 func main() {
-	app := cli.NewApp()
-
-	app.Flags = []cli.Flag{
-		cli.StringFlag{
-			Name:  "config, c",
-			Usage: "Load configuration from `FILE`",
-		},
+	done := make(chan struct{})
+	langs := []string{"Go", "C", "C++", "Java", "Perl", "Python"}
+	for _, l := range langs {
+		go warrior(l, done)
 	}
-
-	err := app.Run(os.Args)
-	if err != nil {
-		log.Fatal(err)
+	for range langs {
+		<-done
 	}
 }

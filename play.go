@@ -2,25 +2,14 @@ package main
 
 import "fmt"
 
-var battle = make(chan string)
-
-func warrior(name string, done chan struct{}) {
-	select {
-	case opponent := <-battle:
-		fmt.Printf("%s beat %s\n", name, opponent)
-	case battle <- name:
-		// I lost :-(
-	}
-	done <- struct{}{}
-}
-
 func main() {
-	done := make(chan struct{})
-	langs := []string{"Go", "C", "C++", "Java", "Perl", "Python,", "Swift", "Scala"}
-	for _, l := range langs {
-		go warrior(l, done)
+
+	attended := map[string]bool{
+		"Ann": true,
+		"Joe": true,
 	}
-	for range langs {
-		<-done
+
+	if attended["Ann"] { // will be false if person is not in the map
+		fmt.Println("Ann", "was at the meeting")
 	}
 }

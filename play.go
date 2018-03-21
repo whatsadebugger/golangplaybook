@@ -1,6 +1,13 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"github.com/tidwall/gjson"
+)
+
+type winner interface {
+	win()
+}
 
 func main() {
 
@@ -17,6 +24,12 @@ func main() {
 
 	fmt.Println(^uint(0))
 	fmt.Println(^uint(0) >> 1)
+
+	fmt.Println(gjson.Valid(``))
+	fmt.Println(gjson.Valid(`{}`))
+	fmt.Println(gjson.Valid(`{"true":1}`))
+	fmt.Println(gjson.Valid(`{"false":1,}`))
+
 }
 
 func min(a ...int) int {

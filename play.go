@@ -1,30 +1,39 @@
 package main
 
-import (
-	"fmt"
-	"sync"
-)
+import "fmt"
 
-var wg sync.WaitGroup
-
-func printer(ch chan int) {
-	for i := range ch {
-		fmt.Printf("Received %d \n", i)
-	}
-	wg.Done()
+type notifier interface {
+	notify()
 }
 
-// main is the entry point for the program.
+type user struct {
+	name  string
+	email string
+}
+
+type admin struct {
+	user
+	level string
+}
+
+func (a *admin) notify() {
+	fmt.Printf("Sending email to admin: %s<%s>\n", a.name, a.email)
+}
+
+func (u *user) notify() {
+	fmt.Printf("Sending email to user: %s<%s>\n", u.name, u.email)
+}
+
 func main() {
-	c := make(chan int)
-	go printer(c)
-	wg.Add(1)
-
-	// Send 10 integers on the channel.
-	for i := 1; i <= 10; i++ {
-		c <- i
+	u := user{name: "ahmad tabbakha", email: "tabba.ahmad@gmail.com"}
+	ad := admin{
+		user:  user{name: "ahmad leet", email: "ahmad1337@admin.com"},
+		level: "super",
 	}
+	sendNotification(&u)
+	sendNotification(&ad)
+}
 
-	close(c)
-	wg.Wait()
+func sendNotification(n notifier) {
+	n.notify()
 }

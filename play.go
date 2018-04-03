@@ -31,6 +31,8 @@ func main() {
 		level: "super",
 	}
 	sendNotification(&u)
+	sendNotification(&u)
+	sendNotification(&ad)
 	sendNotification(&ad)
 }
 

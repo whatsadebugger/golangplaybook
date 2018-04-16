@@ -16,7 +16,7 @@ func main() {
 			return
 		}
 		for k := range v {
-			if k != "Name" {
+			if k == "type" {
 				delete(v, k)
 			}
 		}

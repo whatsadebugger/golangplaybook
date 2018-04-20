@@ -1,27 +1,18 @@
 package main
 
 import (
-	"encoding/json"
-	"log"
-	"os"
+	"fmt"
 )
 
+// import
+
 func main() {
-	dec := json.NewDecoder(os.Stdin)
-	enc := json.NewEncoder(os.Stdout)
-	for {
-		var v map[string]interface{}
-		if err := dec.Decode(&v); err != nil {
-			log.Println(err)
-			return
-		}
-		for k := range v {
-			if k == "type" {
-				delete(v, k)
-			}
-		}
-		if err := enc.Encode(&v); err != nil {
-			log.Println(err)
-		}
-	}
+	// add minutes and hours. If negative get final minutes and hours and add + 24 +60
+	// if non negative get final minutes and hours and create object
+	h, m := 1, -4820
+	tom := h*60 + m
+	fm := tom % 60
+	fh := (tom % 24) + 24
+
+	fmt.Println(fh, fm)
 }

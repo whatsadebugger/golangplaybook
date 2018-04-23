@@ -1,18 +1,33 @@
 package main
 
-import (
-	"fmt"
-)
+import "fmt"
 
-// import
+type Describer interface {
+	Describe()
+}
+type Person struct {
+	name string
+	age  int
+}
+
+func (p Person) Describe() {
+	fmt.Printf("%s is %d years old", p.name, p.age)
+}
+
+func findType(i interface{}) {
+	switch v := i.(type) {
+	case Describer:
+		v.Describe()
+	default:
+		fmt.Printf("unknown type\n")
+	}
+}
 
 func main() {
-	// add minutes and hours. If negative get final minutes and hours and add + 24 +60
-	// if non negative get final minutes and hours and create object
-	h, m := 1, -4820
-	tom := h*60 + m
-	fm := tom % 60
-	fh := (tom % 24) + 24
-
-	fmt.Println(fh, fm)
+	findType("Ahmad")
+	p := Person{
+		name: "Ahmad Tabbakha",
+		age:  24,
+	}
+	findType(p)
 }

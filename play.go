@@ -7,5 +7,5 @@ import (
 
 func main() {
 	x := 3
-	fmt.Println("type:", reflect.TypeOf(x))
+	fmt.Println("value:", reflect.ValueOf(x).String())
 }

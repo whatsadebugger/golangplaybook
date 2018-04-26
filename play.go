@@ -6,9 +6,9 @@ import (
 )
 
 func main() {
-	x := 3.4
+	var x uint8 = 'x'
 	v := reflect.ValueOf(x)
-	fmt.Println("type:", v.Type())
-	fmt.Println("kind is float64:", v.Kind() == reflect.Float64)
-	fmt.Println("value:", v.Float())
+	fmt.Println("type:", v.Type())                            // uint8.
+	fmt.Println("kind is uint8: ", v.Kind() == reflect.Uint8) // true.
+	x = uint8(v.Uint())                                       // v.Uint returns a uint64.
 }

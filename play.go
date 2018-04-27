@@ -18,4 +18,8 @@ func main() {
 		fmt.Printf("%d: %s %s = %v\n", i,
 			typeOfT.Field(i).Name, f.Type(), f.Interface())
 	}
+
+	s.Field(0).SetInt(2000)
+	s.Field(1).SetString("Chickens")
+	fmt.Println("t is now", t)
 }

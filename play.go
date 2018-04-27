@@ -17,6 +17,9 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	fmt.Printf("%s", b)
+	fmt.Printf("%s\n", b)
+	var m2 Message
+	json.Unmarshal(b, &m2)
+	fmt.Printf("Name: %s\nMessage: %s", m2.Name, m2.Msg)
 
 }

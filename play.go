@@ -2,26 +2,21 @@ package main
 
 import (
 	"encoding/json"
-	"log"
-	"os"
+	"fmt"
 )
 
+type Message struct {
+	Name string `json:"name"`
+	Msg  string `json:"message"`
+}
+
 func main() {
-	dec := json.NewDecoder(os.Stdin)
-	enc := json.NewEncoder(os.Stdout)
-	for {
-		var v map[string]interface{}
-		if err := dec.Decode(&v); err != nil {
-			log.Println(err)
-			return
-		}
-		for k := range v {
-			if k != "Name" {
-				delete(v, k)
-			}
-		}
-		if err := enc.Encode(&v); err != nil {
-			log.Println(err)
-		}
+
+	m := Message{Name: "ahmad", Msg: "ahmad is learning so much everyday"}
+	b, err := json.Marshal(m)
+	if err != nil {
+		panic(err)
 	}
+	fmt.Printf("%s", b)
+
 }

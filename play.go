@@ -6,7 +6,11 @@ import (
 )
 
 func main() {
-	v := reflect.ValueOf("Wow a string").Interface()
+	str := "wow a string"
+	v := reflect.ValueOf(&str)
+	fmt.Println("Can set: ", v.Elem().CanSet())
+	v.Elem().SetString("WOW i changed it")
 
-	fmt.Println(v)
+	fmt.Println("pointer to string: ", v.Interface())
+	fmt.Println("modified string: ", str)
 }

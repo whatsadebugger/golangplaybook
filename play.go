@@ -5,21 +5,27 @@ import (
 	"fmt"
 )
 
-type Message struct {
-	Name string `json:"name"`
-	Msg  string `json:"message"`
-}
-
 func main() {
-
-	m := Message{Name: "ahmad", Msg: "ahmad is learning so much everyday"}
-	b, err := json.Marshal(m)
-	if err != nil {
+	b := []byte(`{"Name":"Wednesday","Age":6,"Parents":["Gomez","Morticia"]}`)
+	var f interface{}
+	if err := json.Unmarshal(b, &f); err != nil {
 		panic(err)
 	}
-	fmt.Printf("%s\n", b)
-	var m2 Message
-	json.Unmarshal(b, &m2)
-	fmt.Printf("Name: %s\nMessage: %s", m2.Name, m2.Msg)
+	m := f.(map[string]interface{})
 
+	for k, v := range m {
+		switch vv := v.(type) {
+		case string:
+			fmt.Println(k, "is string", vv)
+		case float64:
+			fmt.Println(k, "is float64", vv)
+		case []interface{}:
+			fmt.Println(k, "is an array:")
+			for i, u := range vv {
+				fmt.Println(i, u)
+			}
+		default:
+			fmt.Println(k, "is of a type I don't know how to handle")
+		}
+	}
 }

@@ -1,17 +1,18 @@
 package main
 
 import (
-	"github.com/smartcontractkit/chainlink/logger"
 	"os/exec"
+
+	"github.com/smartcontractkit/chainlink/logger"
 )
 
 func main() {
-	openDeluge("magnet:?xt=urn:btih:5JDFCUZXLLHYNIM3WSOGOSYXXZAZXFSD")
+	xdgOpen("magnet:?xt=urn:btih:5JDFCUZXLLHYNIM3WSOGOSYXXZAZXFSD")
 }
 
 // opens a magnet link in deluge-gtk
-func openDeluge(mag string) {
-	cmd1 := exec.Command("deluge-gtk", mag)
+func xdgOpen(mag string) {
+	cmd1 := exec.Command("xdg-open", mag)
 	if err := cmd1.Run(); err != nil {
 		logger.Error(err)
 	}

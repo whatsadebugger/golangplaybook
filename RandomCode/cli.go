@@ -32,5 +32,7 @@ func main() {
 func test(c *cli.Context) error {
 	// the only arguments that get passed in are the ones that come after the command
 	fmt.Println(c.Args())
+	fmt.Println(c.Args().Get(0))
+	fmt.Println(c.Args().Get(1))
 	return nil
 }

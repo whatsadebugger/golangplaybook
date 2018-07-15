@@ -51,12 +51,9 @@ func TestVersionDeterminesSize(t *testing.T) {
 	}
 
 	for _, test := range table {
-		buffer := new(bytes.Buffer)
-		GenerateQRCode(buffer, "555-2368", Version(test.version))
-		img, _ := png.Decode(buffer)
-		if width := img.Bounds().Dx(); width != test.expected {
-			t.Errorf("Version %2d, expected %3d but got %3d",
-				test.version, test.expected, width)
+		size := Version(test.version).PatternSize()
+		if size != test.expected {
+			t.Errorf("Version %2d, expected %3d but got %3d", test.version, test.expected, size)
 		}
 	}
 }

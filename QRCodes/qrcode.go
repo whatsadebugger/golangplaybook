@@ -25,9 +25,13 @@ type Version int8
 
 // GenerateQRCode creates a QR code!
 func GenerateQRCode(w io.Writer, code string, version Version) error {
-	size := 4*int(version) + 17
+	size := version.PatternSize()
 	img := image.NewRGBA(image.Rect(0, 0, size, size))
 	return png.Encode(w, img)
+}
+
+func (v Version) PatternSize() int {
+	return 4*int(v) + 17
 }
 
 func must(err error) {

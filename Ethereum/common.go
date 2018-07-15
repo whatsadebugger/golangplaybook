@@ -22,4 +22,8 @@ func main() {
 	fmt.Println(common.HexToAddress("0x0") == common.HexToAddress("0x0"))
 	fmt.Println(common.HexToAddress("0x0") == common.HexToAddress("0x1"))
 	fmt.Println(common.HexToAddress("0x0") != common.HexToAddress("0x1"))
+
+	if !common.IsHexAddress("0x10000000000000000000000000000000000000000") || common.HexToAddress("0x1000000000000000000000000000000000000000") == common.HexToAddress("0x0") {
+		fmt.Println("bad address")
+	}
 }

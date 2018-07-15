@@ -16,13 +16,17 @@ func main() {
 	must(err)
 	defer file.Close()
 
-	err = GenerateQRCode(file, "555-2368")
+	err = GenerateQRCode(file, "555-2368", Version(1))
 	must(err)
 }
 
+// Version determines qr version and size
+type Version int8
+
 // GenerateQRCode creates a QR code!
-func GenerateQRCode(w io.Writer, code string) error {
-	img := image.NewRGBA(image.Rect(0, 0, 21, 21))
+func GenerateQRCode(w io.Writer, code string, version Version) error {
+	size := 4*int(version) + 17
+	img := image.NewRGBA(image.Rect(0, 0, size, size))
 	return png.Encode(w, img)
 }
 

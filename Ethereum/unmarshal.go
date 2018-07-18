@@ -14,6 +14,8 @@ type WithdrawalRequest struct {
 
 func main() {
 	var wr WithdrawalRequest
-	json.Unmarshal([]byte(`{"address": "0xBEEF0002200AA000000000000000000000AA0000", "amount": "1000000"}`), &wr)
+	json.Unmarshal([]byte(`{"address": "0xBEEFBEEFBEEFA000000000000000000000AA0000", "amount": "1"}`), &wr)
 	fmt.Printf("%+v\n", wr)
+	fmt.Println(wr.Amount.Cmp(assets.NewLink(2)))
+	fmt.Println(wr.Amount.Cmp(assets.NewLink(1)))
 }

@@ -7,3 +7,19 @@ func Multiply321(multiplicand int) int {
 	product += multiplicand
 	return product
 }
+
+func Multiply321Add(multiplicand int) int {
+	product := multiplicand
+	product += product
+	product += product
+	product += product
+	product += product
+	product += product
+	product += product
+
+	product1 := product
+	product1 += product1
+	product1 += product1
+
+	return multiplicand + product + product1
+}

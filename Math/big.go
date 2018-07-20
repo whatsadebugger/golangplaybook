@@ -1,13 +1,13 @@
 package main
 
 import (
-	"math/big"
 	"fmt"
+	"math/big"
 )
 
 func main() {
-	fmt.Println(9223372036854775807)
 	b := big.NewInt(1e0)
-	fmt.Println(b.Add(b,b).Text(10))
-	fmt.Println(b)
+	fmt.Println(b, "initial")
+	fmt.Println(b.Add(b, b).String(), "double yourself")
+	fmt.Println(b.Mul(b, big.NewInt(1000)).String(), "Multiply by 1000")
 }

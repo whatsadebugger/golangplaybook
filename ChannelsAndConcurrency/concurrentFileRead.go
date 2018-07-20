@@ -11,7 +11,7 @@ var wg sync.WaitGroup
 
 func main() {
 
-	chA, chB := make(chan string), make(chan string)
+	chA, chB := make(chan string, 5), make(chan string, 5)
 
 	wg.Add(3)
 	go readFromFile(chA)
@@ -64,8 +64,8 @@ func reverse(text string) string {
 	size := len(text)
 	rev := make([]rune, size)
 
-	for i := size - 1; i >= 0; i-- {
-		rev[i] = (rune)(text[i])
+	for i, j := size-1, 0; i >= 0; i, j = i-1, j+1 {
+		rev[j] = (rune)(text[i])
 	}
 
 	return string(rev)

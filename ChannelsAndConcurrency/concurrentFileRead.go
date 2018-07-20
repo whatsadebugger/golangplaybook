@@ -11,7 +11,7 @@ var wg sync.WaitGroup
 
 func main() {
 
-	chA, chB := make(chan string, 5), make(chan string, 5)
+	chA, chB := make(chan string, 100), make(chan string, 100)
 
 	wg.Add(3)
 	go readFromFile(chA)

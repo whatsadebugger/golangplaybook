@@ -1,12 +1,17 @@
 package main
 
 import (
-	"errors"
-
-	"github.com/smartcontractkit/chainlink/logger"
+	"fmt"
 )
 
 func main() {
-	err := errors.New("wow bad error")
-	logger.Warn("OMG AN ERRRRRROR", err)
+	slice := make([]int, 10)
+	for i := range slice {
+		slice[i] = i
+	}
+	fmt.Println(slice)
+
+	for i := range slice[:3] {
+		fmt.Println(i)
+	}
 }

@@ -11,6 +11,8 @@ func main() {
 	fmt.Println(reflect.TypeOf(0xBADFACE))
 	fmt.Println(reflect.TypeOf(.1E-17))
 	fmt.Println(reflect.TypeOf(0333))
+	fmt.Println(reflect.TypeOf(333))
+	fmt.Println(reflect.TypeOf(int32(333)))
 
 	fmt.Println()
 	fmt.Println()

@@ -62,10 +62,10 @@ func printSend(ch, word string) {
 
 func reverse(text string) string {
 	size := len(text)
-	rev := make([]rune, size)
+	rev := make([]byte, size)
 
 	for i, j := size-1, 0; i >= 0; i, j = i-1, j+1 {
-		rev[j] = (rune)(text[i])
+		rev[j] = (byte)(text[i])
 	}
 
 	return string(rev)

@@ -1,37 +1,37 @@
 package main
 
 import (
-  "fmt"
-  "math/rand"
-  "time"
+	"fmt"
+	"math/rand"
+	"time"
 )
 
 // https://pragmacoders.com/multithreading-go-tutorial/ example taken from here. Article states that the code would
 // not work with a unbuffered channel however that is not true. The first routine to respond will win the race and
 // the other one will be stuck waiting for someone to recieve its value. It will just get removed because the program ended.
 func main() {
-  rand.Seed(time.Now().UTC().UnixNano())
+	rand.Seed(time.Now().UTC().UnixNano())
 
-  query := "Our Query"
-  respond := make(chan string)
+	query := "Our Query"
+	results := make(chan string)
 
-  go googleIt(respond, query)
-  go bingIt(respond, query)
+	go googleIt(results, query)
+	go bingIt(results, query)
 
-  queryResp := <-respond
+	resp := <-results
 
-  fmt.Printf("Sent query:\t\t %s\n", query)
-  fmt.Printf("Got Response:\t\t %s\n", queryResp)
+	fmt.Printf("Sent query:\t\t %s\n", query)
+	fmt.Printf("Got Response:\t\t %s\n", resp)
 }
 
-func googleIt(respond chan<- string, query string) {
-  time.Sleep(time.Duration(rand.Intn(3)) * time.Second)
+func googleIt(results chan<- string, query string) {
+	time.Sleep(time.Duration(rand.Intn(3)) * time.Second)
 
-  respond <- "Google Response"
+	results <- "Google Response"
 }
 
-func bingIt(respond chan<- string, query string) {
-  time.Sleep(time.Duration(rand.Intn(2)) * time.Second)
+func bingIt(results chan<- string, query string) {
+	time.Sleep(time.Duration(rand.Intn(2)) * time.Second)
 
-  respond <- "Bing Response"
+	results <- "Bing Response"
 }

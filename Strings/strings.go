@@ -16,7 +16,7 @@ func main() {
 	fmt.Printf("%+q", placeOfInterest)
 	fmt.Printf("\n")
 
-	fmt.Printf("hex bytes: ")
+	fmt.Printf("hex bytes placeOfInterest: ")
 	fmt.Printf("% X", placeOfInterest)
 	fmt.Printf("\n")
 
@@ -24,7 +24,7 @@ func main() {
 	fmt.Printf("%s", sample)
 	fmt.Printf("\n")
 
-	fmt.Printf("quoted placeOfInterest: ")
+	fmt.Printf("quoted sample: ")
 	fmt.Printf("%+q", sample)
 	fmt.Printf("\n")
 

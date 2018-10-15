@@ -5,15 +5,18 @@ import (
 	"fmt"
 )
 
-func main() {
-	address := `"0x6cc5f688a315f3dc28a7781717a9a798a59fda7b"`
-	JSON := `{ "address": ` + address + `, "amount": 10 }`
+type testStructTags struct {
+	Ahmad int `json:"ahmad,damha"`
+}
 
-	var jsonMap map[string]interface{}
-	err := json.Unmarshal([]byte(JSON), &jsonMap)
-	if err != nil {
-		panic(err)
+func main() {
+	JSONS := []string{`{"ahmad":1}`, `{"damha":5}`, `{"ahmad": 0, "damha":5}`, `{"damha": 0, "ahmad":5}`}
+
+	for _, jason := range JSONS {
+		var tst testStructTags
+		if err := json.Unmarshal([]byte(jason), &tst); err != nil {
+			panic(err)
+		}
+		fmt.Println(tst)
 	}
-	fmt.Println(jsonMap["address"])
-	fmt.Println(jsonMap["amount"])
 }

@@ -6,14 +6,17 @@ import (
 	"time"
 )
 
+var source = rand.NewSource(time.Now().UnixNano())
+
 func main() {
 	fmt.Println(RandString(10))
 	fmt.Println(RandString(11))
 	fmt.Println(RandString(12))
 	fmt.Println(RandString(13))
+	fmt.Println(source.Int63() % 1000000000000000)
+	fmt.Println(source.Int63() % 1000000000000000)
+	fmt.Println(source.Int63() % 1000000000000000)
 }
-
-var source = rand.NewSource(time.Now().UnixNano())
 
 const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 

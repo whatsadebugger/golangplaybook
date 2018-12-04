@@ -2,8 +2,6 @@ package main
 
 import (
 	"os/exec"
-
-	"github.com/smartcontractkit/chainlink/logger"
 )
 
 func main() {
@@ -14,6 +12,6 @@ func main() {
 func xdgOpen(mag string) {
 	cmd1 := exec.Command("xdg-open", mag)
 	if err := cmd1.Run(); err != nil {
-		logger.Error(err)
+		panic(err)
 	}
 }

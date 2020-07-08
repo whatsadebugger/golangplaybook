@@ -47,7 +47,7 @@ func first(chA, chB chan string) {
 func second(chB chan string) {
 	for v := range chB {
 		printRead("B", v)
-		fmt.Println("Reversed word from channel A", reverse(v))
+		fmt.Println("Reversed word from channel B", reverse(v))
 	}
 	wg.Done()
 }

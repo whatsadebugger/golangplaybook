@@ -1,5 +1,5 @@
 # golangplaybook
-go code excercises and snippets
+go code exercises and snippets
 # Learning Go
 just gonna add random code here to play with
 
